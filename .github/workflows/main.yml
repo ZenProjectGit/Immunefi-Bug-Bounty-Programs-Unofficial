@@ -5,6 +5,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -12,10 +14,10 @@ jobs:
           python-version: "3.x"
       - name: Run script file
         run: |
-           git config user.name "actions[bot]"
-           git config user.email "noreply@users.noreply.github.com"
-           chmod +x ./scrapper.sh
-           ./scrapper.sh
-           chmod +x ./sort.sh
-           bash sort.sh launchDate --export
+          git config user.name "actions[bot]"
+          git config user.email "noreply@users.noreply.github.com"
+          chmod +x ./scrapper.sh
+          . ./scrapper.sh
+          chmod +x ./sort.sh
+          bash sort.sh launchDate --export
         shell: bash
