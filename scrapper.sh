@@ -51,25 +51,4 @@ for ((index = 0; index <= bounty_count - 1; index++)); do
   fi
 
 done
-
-# If there are any changes, commit them.
-if [[ -z $(git status -s | grep -o -P 'project/.*') ]]; then
-  echo "Nothing changed"
-else
-
-  projects_changed=$(git status -s | grep -o -P '(?<=M project\/).*(?=\.json)' | sed 's/^/#/' | xargs)
-
-  # Commit message
-  echo -e "\n\n"
-  mg=$(echo -e "Projects added or unpaused:\n$added_or_unpaused_programs\n\nProjects removed or paused:\n$paused_or_removed_programs\n\nProjects with updates:\n$projects_changed")
-  echo -e "$mg"
-
-  # Push to github
-  git add --all
-  git commit -m "$mg"
-  git push
-
-fi
-
-date
 exit
