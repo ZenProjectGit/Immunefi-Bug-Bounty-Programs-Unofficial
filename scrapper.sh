@@ -51,4 +51,3 @@ for ((index = 0; index <= bounty_count - 1; index++)); do
   fi
 
 done
-exit
