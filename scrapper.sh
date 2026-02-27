@@ -11,6 +11,7 @@ cat ./projects.json | jq -r '.[].slug' | sort >./previous_slugs.txt
 paused_or_removed_programs=$(comm -23 ./previous_slugs.txt ./current_slugs.txt | sed 's/^/#/' | sed -r 's/\s+//g' | xargs)
 # Programs that appeared in the directory (added or unpaused).
 added_or_unpaused_programs=$(comm -13 ./previous_slugs.txt ./current_slugs.txt | sed 's/^/#/' | sed -r 's/\s+//g' | xargs)
+export added_or_unpaused_programs paused_or_removed_programs
 
 # Clean up temporary lists.
 rm ./previous_slugs.txt
